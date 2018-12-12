@@ -29,5 +29,6 @@ hs_err_pid*
 .DS_Store
 
 # temporary
+target/
 account-ms
 log.txt
