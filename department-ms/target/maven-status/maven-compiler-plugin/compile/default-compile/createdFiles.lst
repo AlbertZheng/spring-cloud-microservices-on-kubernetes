@@ -1,8 +1,0 @@
-com/kyletiger/cloud/department/entity/Department.class
-com/kyletiger/cloud/department/mapper/DepartmentCrudMapper.class
-com/kyletiger/cloud/common/entity/ErrorEntity.class
-com/kyletiger/cloud/department/DepartmentMicroserviceApplication.class
-com/kyletiger/cloud/department/service/DepartmentService.class
-com/kyletiger/cloud/department/config/Swagger2Config.class
-com/kyletiger/cloud/department/controller/DepartmentController.class
-com/kyletiger/cloud/common/GlobalExceptionHandler.class

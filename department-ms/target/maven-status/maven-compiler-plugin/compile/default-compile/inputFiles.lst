@@ -1,8 +1,0 @@
-/Users/albert.zheng/mac.workspace/github/spring-cloud-microservices-on-kubernetes/department-ms/src/main/java/com/kyletiger/cloud/department/controller/DepartmentController.java
-/Users/albert.zheng/mac.workspace/github/spring-cloud-microservices-on-kubernetes/department-ms/src/main/java/com/kyletiger/cloud/department/mapper/DepartmentCrudMapper.java
-/Users/albert.zheng/mac.workspace/github/spring-cloud-microservices-on-kubernetes/department-ms/src/main/java/com/kyletiger/cloud/department/service/DepartmentService.java
-/Users/albert.zheng/mac.workspace/github/spring-cloud-microservices-on-kubernetes/department-ms/src/main/java/com/kyletiger/cloud/common/entity/ErrorEntity.java
-/Users/albert.zheng/mac.workspace/github/spring-cloud-microservices-on-kubernetes/department-ms/src/main/java/com/kyletiger/cloud/department/DepartmentMicroserviceApplication.java
-/Users/albert.zheng/mac.workspace/github/spring-cloud-microservices-on-kubernetes/department-ms/src/main/java/com/kyletiger/cloud/department/config/Swagger2Config.java
-/Users/albert.zheng/mac.workspace/github/spring-cloud-microservices-on-kubernetes/department-ms/src/main/java/com/kyletiger/cloud/department/entity/Department.java
-/Users/albert.zheng/mac.workspace/github/spring-cloud-microservices-on-kubernetes/department-ms/src/main/java/com/kyletiger/cloud/common/GlobalExceptionHandler.java
