@@ -1,0 +1,40 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hystrix-turbine
+  labels:
+    deployment: hystrix-turbine
+spec:
+  selector:
+    app: hystrix-turbine-app
+  ports:
+    - name: hystrix-turbine-port
+      protocol: TCP
+      port: 9100
+      nodePort: 39100
+  # 不要用type: ClusterIP，会导致没有分配nodePort（i.e. API页面李查看到nodePort=0）
+  #type: ClusterIP
+  #type: LoadBalancer
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hystrix-turbine
+  labels:
+    deployment: hystrix-turbine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hystrix-turbine-app
+  template:
+    metadata:
+      labels:
+        app: hystrix-turbine-app
+    spec:
+      containers:
+      - name: hystrix-turbine-container
+        image: albertzheng/hystrix-turbine:0.0.4-SNAPSHOT
+        ports:
+        - containerPort: 9100

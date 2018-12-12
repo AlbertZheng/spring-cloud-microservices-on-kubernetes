@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  这个pom.xml是各个项目modules可直接重用的root pom.xml：
+  1. 开发microservice需要的公用依赖和测试过的最佳版本号组合已经事先在这个pom.xml定义好了；
+  2. 开发microservice需要的公用maven plugins已经事先在这个pom.xml定义好了；
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.kyletiger.cloud</groupId>
+  <artifactId>spring-cloud-microservices-on-kubernetes-root</artifactId>
+  <version>0.0.4-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Spring Cloud Microservices on Kubernetes - Root</name>
+
+  <modules>
+	<module>discovery-eureka</module>
+    <module>config-server</module>
+    <module>apigateway-zuul</module>
+    <module>hystrix-dashboard</module>
+    <module>hystrix-turbine</module>
+    <module>employee-ms</module>
+    <module>department-ms</module>
+  </modules>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <springcloud.version>Edgware.RELEASE</springcloud.version>
+    <springboot.version>1.5.9.RELEASE</springboot.version>
+    <guava.version>21.0</guava.version>
+    <mysql-connector-java.version>5.1.40</mysql-connector-java.version>
+    <springfox-swagger2.version>2.8.0</springfox-swagger2.version>
+    <junit.jupiter.version>5.3.2</junit.jupiter.version>
+    <flyway.version>5.2.4</flyway.version>
+
+    <scm.maven-git-url>https://github.com/AlbertZheng/spring-cloud-microservices-on-kubernetes.git</scm.maven-git-url>
+    <remote.maven.repository.url.prefix>http://jfrog.kyletiger.com/artifactory</remote.maven.repository.url.prefix>
+  </properties>
+
+  <!-- SCM的定义: "maven release" workflow将会使用它。 -->
+  <scm>
+    <url>scm:git:${scm.maven-git-url}</url>
+    <connection>${project.scm.url}</connection>
+    <developerConnection>${project.scm.url}</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Import dependency management from Spring Cloud -->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${springcloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Import dependency management from Spring Boot -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${springboot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  
+  <dependencies>
+    <!-- Spring Boot Test with JUnit 5 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+      <!-- Exclude JUnit 4 from starter-test (and all other related test-starter,
+           i.e those for security and project reactor) -->
+      <exclusions>
+        <exclusion>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- Here provide JUnit 5 API -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- and the engine for surefire and failsafe -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit.jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Spring Cloud Eureka Client -->
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+      <!-- 移除Jersey依赖。Spring Cloud将自动配置RestTemplate作为HTTP Client。 -->
+      <!--
+      <exclusions>
+        <exclusion>
+          <groupId>com.sun.jersey</groupId>
+          <artifactId>jersey-client</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.sun.jersey</groupId>
+          <artifactId>jersey-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.sun.jersey.contribs</groupId>
+          <artifactId>jersey-apache-client4</artifactId>
+        </exclusion>
+      </exclusions>
+      -->
+    </dependency>
+
+    <!-- Spring Cloud Config Client -->
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-config</artifactId>
+    </dependency>
+
+    <!-- Spring Cloud Hystrix:
+         1. 已包含hystrix-metrics-event-stream模块: 监控信息以text/event-stream的格式暴露出来；
+         2. 配合actuator，则可在hystrix dashboard的/hystrix.stream端点上获得hystrix的监控信息。
+    -->
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-openfeign</artifactId>
+    </dependency>
+
+    <!-- Spring Cloud Bus AMQP -->
+    <!--
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+    </dependency>
+    -->
+
+    <!-- Spring Boot Actuator: 监控当前应用的健康状况，提供很多监控端点。 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <!-- Lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.4</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- MyBatis -->
+    <dependency>
+      <groupId>org.mybatis.spring.boot</groupId>
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+      <version>1.3.2</version>
+    </dependency>
+
+    <!-- Flyway -->
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+      <version>${flyway.version}</version>
+    </dependency>
+
+    <!-- Swagger 2 & SpringFox -->
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>${springfox-swagger2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>${springfox-swagger2.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql-connector-java.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <!--  Define the resource file (e.g. application.yml) directory for replacing "@..@" tokens -->
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
+    <plugins>
+      <!-- This plugin will replace "@..@" tokens with actual value when maven is compiling our codes -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.7</version>
+        <configuration>
+          <delimiters>
+            <delimiter>@</delimiter>
+          </delimiters>
+          <useDefaultDelimiters>false</useDefaultDelimiters>
+        </configuration>
+      </plugin>
+
+      <!-- maven release plugin: My definition for "mvn release" workflow. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <useReleaseProfile>false</useReleaseProfile>
+          <goals>deploy</goals>
+          <!-- I prefer that every module gets the same version as the parent POM -->
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <scmCommentPrefix>[skip ci][maven-release]</scmCommentPrefix>
+          <!-- Default value is: @{project.artifactId}-@{project.version}. -->
+          <tagNameFormat>@{project.version}</tagNameFormat>
+          <!-- Username and Password should be jnjected by CI system -->
+          <username>${env.SCM_USERNAME}</username>
+          <password>${env.SCM_PASSWORD}</password>
+        </configuration>
+      </plugin>
+
+      <!-- Here you can configure your special javac options if needed. -->
+      <!-- maven compiler plugin -->
+      <!--
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <compilerArgs>
+              <arg>-verbose</arg>
+              <arg>-Xlint:all,-options,-path</arg>
+            </compilerArgs>
+          </configuration>
+      </plugin>
+      -->
+
+      <!-- spring boot maven-plugin -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${springboot.version}</version>
+        <!-- If you are NOT using the parent POM of Spring Boot, you must additionally add an <executions> section to execute `repackage` goal for creating an executable 'fat' JAR or WAR. -->
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

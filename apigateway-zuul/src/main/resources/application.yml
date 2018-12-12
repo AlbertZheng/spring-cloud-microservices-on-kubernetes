@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+zuul:
+  ribbon:
+    # 启动饥饿加载
+    eager-load:
+      enabled: true
+  # 资源隔离策略采用thread pool，默认是semaphore
+  ribbon-isolation-strategy: thread
+  thread-pool:
+    # 为每个路由使用独立的thread pool
+    use-separate-thread-pools: true
+  routes:
+    employee-route:
+      service-id: employee-ms
+      path: /employees/**
+      # 路由时不去除掉path前缀
+      strip-prefix: false
+    department-route:
+      service-id: department-ms
+      path: /departments/**
+      # 路由时不去除掉path前缀
+      strip-prefix: false
+
+logging:
+  level:
+    #org.springframework.cloud: DEBUG
+    #org.springframework.boot: DEBUG
+    com.kyletiger.cloud.zuul.ZuulApplication: DEBUG
+
+management:
+  security:
+    # 允许Actuator的/health端点显示出详情
+    enabled: false
+
+info:
+  app:
+    name: @project.artifactId@
+    encoding: @project.build.sourceEncoding@
+    java:
+      source: @java.version@
+      target: @java.version@

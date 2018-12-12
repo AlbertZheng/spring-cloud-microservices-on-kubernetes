@@ -1,0 +1,40 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: config-server
+  labels:
+    deployment: config-server
+spec:
+  selector:
+    app: config-server-app
+  ports:
+    - name: config-server-port
+      protocol: TCP
+      port: 8888
+      nodePort: 38888
+  # 不要用type: ClusterIP，会导致没有分配nodePort（i.e. API页面李查看到nodePort=0）
+  #type: ClusterIP
+  #type: LoadBalancer
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-server
+  labels:
+    deployment: config-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: config-server-app
+  template:
+    metadata:
+      labels:
+        app: config-server-app
+    spec:
+      containers:
+      - name: config-server-container
+        image: albertzheng/config-server:0.0.4-SNAPSHOT
+        ports:
+        - containerPort: 8888

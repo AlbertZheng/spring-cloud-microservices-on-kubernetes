@@ -1,0 +1,40 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: department-ms
+  labels:
+    deployment: department-ms
+spec:
+  selector:
+    app: department-ms-app
+  ports:
+    - name: department-ms-port
+      protocol: TCP
+      port: 8100
+      nodePort: 38100
+  # 不要用type: ClusterIP，会导致没有分配nodePort（i.e. API页面李查看到nodePort=0）
+  #type: ClusterIP
+  #type: LoadBalancer
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: department-ms
+  labels:
+    deployment: department-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: department-ms-app
+  template:
+    metadata:
+      labels:
+        app: department-ms-app
+    spec:
+      containers:
+      - name: department-ms-container
+        image: albertzheng/department-ms:0.0.4-SNAPSHOT
+        ports:
+        - containerPort: 8100

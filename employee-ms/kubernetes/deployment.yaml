@@ -1,0 +1,40 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: employee-ms
+  labels:
+    deployment: employee-ms
+spec:
+  selector:
+    app: employee-ms-app
+  ports:
+    - name: employee-ms-port
+      protocol: TCP
+      port: 8000
+      nodePort: 38000
+  # 不要用type: ClusterIP，会导致没有分配nodePort（i.e. API页面李查看到nodePort=0）
+  #type: ClusterIP
+  #type: LoadBalancer
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employee-ms
+  labels:
+    deployment: employee-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: employee-ms-app
+  template:
+    metadata:
+      labels:
+        app: employee-ms-app
+    spec:
+      containers:
+      - name: employee-ms-container
+        image: albertzheng/employee-ms:0.0.4-SNAPSHOT
+        ports:
+        - containerPort: 8000

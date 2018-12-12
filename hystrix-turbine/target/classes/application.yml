@@ -1,0 +1,24 @@
+server:
+  port: 9100
+
+turbine:
+  appConfig: employee-ms,department-ms
+  clusterNameExpression: "'default'"
+
+logging:
+  level:
+    #org.springframework.cloud: DEBUG
+    #org.springframework.boot: DEBUG
+
+management:
+  security:
+    # 允许Actuator的/health端点显示出详情
+    enabled: false
+
+info:
+  app:
+    name: hystrix-turbine
+    encoding: UTF-8
+    java:
+      source: 1.8.0_172
+      target: 1.8.0_172

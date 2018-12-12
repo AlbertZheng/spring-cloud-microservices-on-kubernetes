@@ -1,0 +1,29 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: discovery-eureka
+
+eureka:
+  client:
+    # 让Eureka Client将它宿主Service的Actuator的/health端点的健康状态传播到Eureka Server.
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://eureka-0.discovery.default.svc.cluster.local:${server.port}/eureka/,http://eureka-1.discovery.default.svc.cluster.local:${server.port}/eureka/
+  server:
+    # 当网络出现不稳定时，记得需要配置为false禁用Eureka Server的"自我保护模式".
+    enable-self-preservation: true
+  instance:
+    hostname: ${spring.application.name}
+    # 将自己的IP地址注册到Eureka Server上，而不是采用**所在主机OS**的hostname进行注册.
+    prefer-ip-address: true
+
+info:
+  app:
+    name: discovery-eureka
+    encoding: UTF-8
+    java:
+      source: 1.8.0_172
+      target: 1.8.0_172

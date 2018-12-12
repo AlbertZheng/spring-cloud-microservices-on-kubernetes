@@ -1,0 +1,53 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        # 采用git仓库作为存储config files的后端
+        git:
+          # 全局配置：采用启动时就clone git仓库
+          clone-on-start: true
+          # git仓库的地址
+          uri: https://github.com/AlbertZheng/spring-cloud-microservices-on-kubernetes.git
+          searchPaths: config-server-git-backend
+          # git仓库的账号
+          username:
+          # git仓库的密码
+          password:
+
+#logging:
+#  level:
+#    org.springframework.cloud: DEBUG
+#    org.springframework.boot: DEBUG
+
+management:
+  security:
+    # 允许Actuator的/health端点显示出详情
+    enabled: false
+
+info:
+  app:
+    name: @project.artifactId@
+    encoding: @project.build.sourceEncoding@
+    java:
+      source: @java.version@
+      target: @java.version@
+
+eureka:
+  client:
+    # 让Eureka Client将它宿主Service的Actuator的/health端点的健康状态传播到Eureka Server.
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      # Production Environment: Kubernetes deployment
+      defaultZone: http://eureka-0.discovery.default.svc.cluster.local:8761/eureka/,http://eureka-1.discovery.default.svc.cluster.local:8761/eureka/
+      #> Just for local deployment testing.
+      #defaultZone: http://master1.k8s.kyletiger.com:38761/eureka/,http://node1.k8s.kyletiger.com:38762/eureka/
+  instance:
+    hostname: ${spring.application.name}
+    # 将自己的IP地址注册到Eureka Server上，而不是采用**所在主机OS**的hostname进行注册.
+    prefer-ip-address: true

@@ -1,0 +1,21 @@
+server:
+  port: 9000
+
+logging:
+  level:
+    #org.springframework.cloud: DEBUG
+    #org.springframework.boot: DEBUG
+
+management:
+  security:
+    # 允许Actuator的/health端点显示出详情
+    enabled: false
+
+info:
+  app:
+    name: @project.artifactId@
+    encoding: @project.build.sourceEncoding@
+    java:
+      source: @java.version@
+      target: @java.version@
+

@@ -1,0 +1,40 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hystrix-dashboard
+  labels:
+    deployment: hystrix-dashboard
+spec:
+  selector:
+    app: hystrix-dashboard-app
+  ports:
+    - name: hystrix-dashboard-port
+      protocol: TCP
+      port: 9000
+      nodePort: 39000
+  # 不要用type: ClusterIP，会导致没有分配nodePort（i.e. API页面李查看到nodePort=0）
+  #type: ClusterIP
+  #type: LoadBalancer
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hystrix-dashboard
+  labels:
+    deployment: hystrix-dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hystrix-dashboard-app
+  template:
+    metadata:
+      labels:
+        app: hystrix-dashboard-app
+    spec:
+      containers:
+      - name: hystrix-dashboard-container
+        image: albertzheng/hystrix-dashboard:0.0.4-SNAPSHOT
+        ports:
+        - containerPort: 9000

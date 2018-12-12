@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  ports:
+    - port: 3306
+      nodePort: 33306
+  selector:
+    app: mysql
+  # Production environment: Use below.
+  # Lets the Service DNS name resolve directly to the Pod’s IP address
+  #clusterIP: None
+  # Non-production environment Use below for exposing on external public IP.
+  #type: LoadBalancer
+  type: NodePort
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  # "strategy: Recreate" instructs Kubernetes to not use rolling updates.
+  # Rolling updates will not work, as you cannot have more than one Pod running at a time.
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - image: mysql:5.7.24
+          name: mysql
+          env:
+            # Use secret in real usage
+            - name: MYSQL_ROOT_PASSWORD
+              value: XXXX
+            - name: MYSQL_USER
+              value: spring
+            - name: MYSQL_PASSWORD
+              value: spring123456
+          args:
+            - '--character-set-server=utf8mb4'
+            - '--collation-server=utf8mb4_unicode_ci'
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            #- name: timezone-info
+            #  mountPath: /etc/localtime
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+          # CPU and memory limits
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 1024Mi
+      volumes:
+        #- name: timezone-info
+        #  hostPath:
+            # directory location on host
+        #    path: /usr/share/zoneinfo/Asia/Shanghai
+            # the type
+        #    type: File
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysql-pv-claim

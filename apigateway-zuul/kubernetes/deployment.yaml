@@ -1,0 +1,40 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: apigateway-zuul
+  labels:
+    deployment: apigateway-zuul
+spec:
+  selector:
+    app: apigateway-zuul-app
+  ports:
+    - name: apigateway-zuul-port
+      protocol: TCP
+      port: 8080
+      nodePort: 38080
+  # 不要用type: ClusterIP，会导致没有分配nodePort（i.e. API页面李查看到nodePort=0）
+  #type: ClusterIP
+  #type: LoadBalancer
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apigateway-zuul
+  labels:
+    deployment: apigateway-zuul
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: apigateway-zuul-app
+  template:
+    metadata:
+      labels:
+        app: apigateway-zuul-app
+    spec:
+      containers:
+      - name: apigateway-zuul-container
+        image: albertzheng/apigateway-zuul:0.0.4-SNAPSHOT
+        ports:
+        - containerPort: 8080

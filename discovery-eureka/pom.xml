@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.kyletiger.cloud</groupId>
+    <artifactId>spring-cloud-microservices-on-kubernetes-root</artifactId>
+    <version>0.0.4-SNAPSHOT</version>
+  </parent>
+
+  <!-- <groupId>com.kyletiger.discoveryvery</groupId> -->
+  <artifactId>discovery-eureka</artifactId>
+  <!-- <version>0.0.1-SNAPSHOT</version> -->
+  <packaging>jar</packaging>
+  <name>Eureka Server Microservice</name>
+
+  <!--
+  <properties>
+    <start-class>com.kyletiger.cloud.discovery.EurekaServerApplication</start-class>
+  </properties>
+  -->
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Notice: Using this plugin https://github.com/spotify/dockerfile-maven for dockerizing. -->
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <version>1.4.9</version>
+        <executions>
+          <execution>
+            <id>default</id>
+            <goals>
+              <goal>build</goal>
+              <goal>push</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <!-- Notice for macOS: You need to remove "index." from the URL of index.docker.io in ~/.docker/config.json, otherwise the pushing will be denied !-->
+          <repository>albertzheng/${project.artifactId}</repository>
+          <tag>${project.version}</tag>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

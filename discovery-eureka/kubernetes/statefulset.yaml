@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  # Define the serviceName via $(metadata.name)
+  ## Service's FQDN will be $(serviceName).$(namespace).svc.cluster.local
+  name: discovery
+spec:
+  ports:
+  - port: 8761
+    protocol: TCP
+    name: eureka-port
+  clusterIP: None
+  selector:
+    app: eureka-app
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  # Each Pod Name will be $(statefulSet name)-$(ordinal), e.g. eureka-0, eureka-1
+  ## Each Pod's FQDN will be $(statefulSet name)-$(ordinal).$(serviceName).$(namespace).svc.cluster.local
+  name: eureka                      # the name of this StatefulSet
+spec:
+  serviceName: "discovery"          # has to match metadata.name of the above section "Service"
+  replicas: 2
+  podManagementPolicy: Parallel
+  selector:
+    matchLabels:
+      app: eureka-app               #  has to match .spec.template.metadata.labels
+  template:
+    metadata:
+      labels:
+        app: eureka-app             # has to match .spec.selector.matchLabels
+    spec:
+      containers:
+      - name: eureka-container
+        image: albertzheng/discovery-eureka:0.0.4-SNAPSHOT
+        ports:
+        - containerPort: 8761

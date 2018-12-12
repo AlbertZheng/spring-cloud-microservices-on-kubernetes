@@ -1,0 +1,24 @@
+CREATE USER 'spring'
+  IDENTIFIED BY 'spring123456';
+
+CREATE SCHEMA IF NOT EXISTS `employee`
+  DEFAULT CHARACTER SET utf8mb4;
+CREATE SCHEMA IF NOT EXISTS `department`
+  DEFAULT CHARACTER SET utf8mb4;
+
+GRANT ALL ON `employee`.* TO 'spring';
+GRANT ALL ON `department`.* TO 'spring';
+
+CREATE SCHEMA IF NOT EXISTS `account`
+  DEFAULT CHARACTER SET utf8mb4;
+CREATE SCHEMA IF NOT EXISTS `product`
+  DEFAULT CHARACTER SET utf8mb4;
+CREATE SCHEMA IF NOT EXISTS `order`
+  DEFAULT CHARACTER SET utf8mb4;
+CREATE SCHEMA IF NOT EXISTS `membership`
+  DEFAULT CHARACTER SET utf8mb4;
+
+GRANT ALL ON `account`.* TO 'spring';
+GRANT ALL ON `product`.* TO 'spring';
+GRANT ALL ON `order`.* TO 'spring';
+GRANT ALL ON `membership`.* TO 'spring';
