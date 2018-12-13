@@ -47,6 +47,6 @@
 ## ToDo
 
 1. 采用``RabbitMQ``让各个微服务实例异步吐出Hystrix Metrics和``Turbine``进行异步采集聚合。
-2. 部署上``Zipkin``和``Elasticsearcg``：估计虚拟机的配置需要升级才能跑得动:(。
+2. 部署上``Zipkin``和``Elasticsearch``：估计虚拟机的配置需要升级才能跑得动:(。
 3. ``TCC``柔性事务处理的演示：需要再开发几个演示``TCC``的微服务。
 4. ``Spring Data JPA``进行ORM。
