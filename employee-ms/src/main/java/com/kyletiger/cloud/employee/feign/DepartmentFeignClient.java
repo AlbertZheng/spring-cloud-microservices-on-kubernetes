@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 // 2. 由于使用了Eureka，所以Ribbon会把name配置的微服务名解析为Eureka Server里注册表中的对应服务；
 // 3. 采用指定``fallbackFactory``参数用于配置降级实现；
 //@FeignClient(name = "department-ms", fallbackFactory = FeignClientFallbackFactory.class)
-// 微服务的内部调用也可统一通过API Gateway来路由，统一进行各种控制策略。
+// 微服务之间的内部调用也可统一通过API Gateway来路由，统一进行各种控制策略。
 @FeignClient(name = "apigateway-zuul", fallbackFactory = FeignClientFallbackFactory.class)
 @RequestMapping(value="/departments")   // 配置使下面的映射都在这个端点下
 public interface DepartmentFeignClient {

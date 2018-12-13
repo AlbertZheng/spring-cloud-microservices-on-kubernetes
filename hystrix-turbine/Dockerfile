@@ -6,13 +6,15 @@ VOLUME /tmp
 
 ENV APP_ARTIFACT_PACKAGE="*.jar"
 ADD target/$APP_ARTIFACT_PACKAGE /
+RUN rm -r -f *-docker-info.jar
 RUN sh -c 'touch /$APP_ARTIFACT_PACKAGE'
 
-ENV JAVA_OPTS=""
+# JVM options
+ENV JAVA_OPTS="-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
 
-# Inject it as one of java's cmd line options
-ENV JAVA_OPTS_SPRING_BOOT="-Dspring.profiles.active=prod"
+# Set the command options for Spring Boot if any
+ENV JAVA_OPTS_SPRING_BOOT=""
 
-# Using docker run with '-e' option if you want to switch the spring boot profile,
-# e.g.: -e SPRING_BOOT_CMD_OPTS="--spring.profiles.active=it"
-CMD java -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:+PrintFlagsFinal -XX:+PrintGCDetails $JAVA_OPTS $JAVA_OPTS_SPRING_BOOT -Djava.security.egd=file:/dev/./urandom -jar `ls $APP_ARTIFACT_PACKAGE` $SPRING_BOOT_CMD_OPTS
+# Using docker run with '-e' option if you want to switch the Spring Boot profile,
+# e.g.: -e SPRING_BOOT_CMD_OPTS="--spring.profiles.active=prod" to inject it as the command option for Spring Boot running.
+CMD java $JAVA_OPTS $JAVA_OPTS_SPRING_BOOT -Djava.security.egd=file:/dev/./urandom -jar `ls $APP_ARTIFACT_PACKAGE` $SPRING_BOOT_CMD_OPTS

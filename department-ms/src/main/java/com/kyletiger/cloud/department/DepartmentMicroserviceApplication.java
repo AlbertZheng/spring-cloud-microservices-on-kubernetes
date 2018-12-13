@@ -14,16 +14,21 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
  * @author 郑立松 - Albert Zheng <lisong.zheng@gmail.com>
  */
 @SpringBootApplication(scanBasePackages = {"com.kyletiger.cloud"})
+
 // To scan my MyBatis mapper classes.
 @MapperScan("com.kyletiger.cloud.department.mapper")
+
 // To use Eureka Client for registering myself and discovering other service providers.
 @EnableDiscoveryClient
+// @EnableDiscoveryClient == @EnableEurekaClient
+
 // To use Feign + Ribbon + Hystrix (If ``feign.hystrix.enabled=true``)
 @EnableFeignClients
-// To enable Hystrix Circuit Breaker
-@EnableCircuitBreaker
 // Note: @EnableHystrix == @EnableFeignClients
 //@EnableHystrix
+
+// To enable Hystrix Circuit Breaker
+@EnableCircuitBreaker
 public class DepartmentMicroserviceApplication {
     public static void main(String[] args) {
         SpringApplication.run(DepartmentMicroserviceApplication.class, args);

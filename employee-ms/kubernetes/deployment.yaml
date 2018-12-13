@@ -12,9 +12,11 @@ spec:
       protocol: TCP
       port: 8000
       nodePort: 38000
-  # 不要用type: ClusterIP，会导致没有分配nodePort（i.e. API页面李查看到nodePort=0）
+  # 不要用type: ClusterIP，会导致没有分配nodePort（i.e. API页面查看到nodePort=0）
   #type: ClusterIP
+  # 生产环境需采用type: LoadBalancer
   #type: LoadBalancer
+  # 生产环境勿用！这里采用type: NodePort只是为了方便远程连接到内网Pod的Web UI上
   type: NodePort
 ---
 apiVersion: apps/v1
@@ -36,5 +38,29 @@ spec:
       containers:
       - name: employee-ms-container
         image: albertzheng/employee-ms:0.0.4-SNAPSHOT
+        env:
+          - name: SPRING_BOOT_CMD_OPTS
+            value: '--spring.profiles.active=prod'
         ports:
         - containerPort: 8000
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 150
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 3
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 120
+          periodSeconds: 5
+          successThreshold: 2
+          timeoutSeconds: 3

@@ -1,12 +1,6 @@
 server:
   port: 8100
 
-spring:
-  datasource:
-    username: spring
-    password: spring123456
-    url: 'jdbc:mysql://mysql.default.svc.cluster.local:33306/department?useLegacyDatetimeCode=false&serverTimezone=Asia/Hong_Kong&useSSL=false'
-
 logging:
   level:
     #org.springframework.cloud: DEBUG

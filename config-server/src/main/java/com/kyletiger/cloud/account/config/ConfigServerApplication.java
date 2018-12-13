@@ -15,8 +15,16 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * @author 郑立松 - Albert Zheng <lisong.zheng@gmail.com>
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class, FlywayAutoConfiguration.class})
-@EnableEurekaClient
+
+// Spring Cloud Edgware及更高版本中：
+// 1. 已经不需要在启动类上添加@EnableEurekaClient或@EnableDiscoveryClient了！
+// 2. 只需要在pom.xml里添加相关依赖，即可自动注册。
+// @EnableDiscoveryClient == @EnableEurekaClient
+//@EnableEurekaClient
+
+// To use Spring Cloud Config Server
 @EnableConfigServer
+
 public class ConfigServerApplication {
   public static void main(String[] args) {
     SpringApplication.run(ConfigServerApplication.class, args);

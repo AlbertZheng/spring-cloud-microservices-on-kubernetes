@@ -3,7 +3,7 @@ server:
 
 zuul:
   ribbon:
-    # 启动饥饿加载
+    # 让Ribbon启动饥饿加载，加快第一次请求的速度
     eager-load:
       enabled: true
   # 资源隔离策略配置为采用thread pool，默认是semaphore

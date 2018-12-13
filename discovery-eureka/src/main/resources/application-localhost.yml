@@ -12,6 +12,7 @@ eureka:
   server:
     # 当网络出现不稳定时，记得需要配置为false禁用Eureka Server的"自我保护模式".
     enable-self-preservation: true
+
 ---
 spring:
   profiles: default,peer0
@@ -22,6 +23,7 @@ eureka:
     hostname: ${spring.application.name}-0
     # 将自己的IP地址注册到Eureka Server上，而不是采用**所在主机OS**的hostname进行注册.
     prefer-ip-address: true
+
 ---
 spring:
   profiles: peer1

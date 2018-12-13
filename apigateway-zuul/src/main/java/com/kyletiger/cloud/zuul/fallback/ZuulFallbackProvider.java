@@ -14,16 +14,11 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 
 
-/**
- * Zuul Fallback.
- *
- * @author 郑立松 - Albert Zheng <lisong.zheng@gmail.com>
- */
 @Component
 public class ZuulFallbackProvider implements FallbackProvider {
     @Override
     public String getRoute() {
-        // 为哪个微服务提供回退，*表示为所有微服务提供回退
+        // 指示为哪个微服务提供回退，*表示为所有微服务提供回退
         return "*";
     }
 

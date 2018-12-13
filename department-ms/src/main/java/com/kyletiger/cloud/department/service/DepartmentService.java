@@ -3,7 +3,6 @@ package com.kyletiger.cloud.department.service;
 import com.google.common.base.Preconditions;
 import com.kyletiger.cloud.department.entity.Department;
 import com.kyletiger.cloud.department.mapper.DepartmentCrudMapper;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

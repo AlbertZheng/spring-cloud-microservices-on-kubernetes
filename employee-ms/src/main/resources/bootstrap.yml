@@ -3,17 +3,18 @@ spring:
     name: employee-ms
 
 eureka:
-  client:
+  #client:
     # 让Eureka Client将它宿主Service的Actuator的/health端点的健康状态传播到Eureka Server.
-    healthcheck:
-      enabled: true
+    #healthcheck:
+    #  enabled: true
   instance:
     hostname: ${spring.application.name}
     # 将自己的IP地址注册到Eureka Server上，而不是采用**所在主机OS**的hostname进行注册.
     prefer-ip-address: true
+
 ---
 spring:
-  profiles: default
+  profiles: prod
   cloud:
     config:
       profile: prod
@@ -23,12 +24,17 @@ spring:
         enabled: true
         # 指定Config Server在服务发现中的serviceId，默认是configserver
         service-id: config-server
+  datasource:
+    username: spring
+    password: spring123456
+    url: 'jdbc:mysql://mysql.default.svc.cluster.local:3306/employee?useLegacyDatetimeCode=false&serverTimezone=Asia/Hong_Kong&useSSL=false'
 
 eureka:
   client:
     serviceUrl:
       # Production Environment: Kubernetes deployment
       defaultZone: http://eureka-0.discovery.default.svc.cluster.local:8761/eureka/,http://eureka-1.discovery.default.svc.cluster.local:8761/eureka/
+
 ---
 spring:
   profiles: localhost
@@ -37,6 +43,10 @@ spring:
       profile: localhost
       label: master
       uri: http://master1.k8s.kyletiger.com:38888/
+  datasource:
+    username: spring
+    password: spring123456
+    url: 'jdbc:mysql://mysql.default.svc.cluster.local:33306/employee?useLegacyDatetimeCode=false&serverTimezone=Asia/Hong_Kong&useSSL=false'
 
 eureka:
   client:

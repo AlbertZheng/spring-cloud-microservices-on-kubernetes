@@ -34,5 +34,8 @@ spec:
       containers:
       - name: eureka-container
         image: albertzheng/discovery-eureka:0.0.4-SNAPSHOT
+        env:
+          - name: SPRING_BOOT_CMD_OPTS
+            value: '--spring.profiles.active=prod'
         ports:
         - containerPort: 8761

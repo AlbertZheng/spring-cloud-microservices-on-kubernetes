@@ -12,9 +12,11 @@ spec:
       protocol: TCP
       port: 9100
       nodePort: 39100
-  # 不要用type: ClusterIP，会导致没有分配nodePort（i.e. API页面李查看到nodePort=0）
+  # 不要用type: ClusterIP，会导致没有分配nodePort（i.e. API页面查看到nodePort=0）
   #type: ClusterIP
+  # 生产环境需采用type: LoadBalancer
   #type: LoadBalancer
+  # 生产环境勿用！这里采用type: NodePort只是为了方便远程连接到内网Pod的Web UI上
   type: NodePort
 ---
 apiVersion: apps/v1
@@ -36,5 +38,9 @@ spec:
       containers:
       - name: hystrix-turbine-container
         image: albertzheng/hystrix-turbine:0.0.4-SNAPSHOT
+        env:
+          - name: SPRING_BOOT_CMD_OPTS
+            value: '--spring.profiles.active=prod'
         ports:
         - containerPort: 9100
+        imagePullPolicy: Always

@@ -2,6 +2,7 @@ server:
   port: 9100
 
 turbine:
+  # 配置要聚合的微服务的serviceId
   appConfig: employee-ms,department-ms
   clusterNameExpression: "'default'"
 
