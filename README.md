@@ -1,10 +1,10 @@
 # 项目说明
 ## 简介
 
-由于经常有互联网圈的朋友们来咨询关于用``spring cloud``全家桶开发微服务应用的问题、以及如何在``kubernetes``上编排部署``spring cloud``微服务的问题，因此萌发了将我以前在几个互联网项目中开发和k8s部署微服务实战中积累的最佳实践提炼出来分享的想法。本项目为一个浓缩了Spring Cloud Microservices on Kubernetes最佳实践的mini微服务应用参考，用于最佳实践的分享，技术演示了：
+由于经常有互联网圈的朋友们来咨询关于用``Spring Cloud``全家桶开发微服务应用的问题、以及如何在``Kubernetes``上编排部署``Spring Cloud``微服务的问题，因此萌发了将我以前在几个互联网项目中开发和k8s部署微服务实战中积累的最佳实践提炼出来分享的想法。本项目为一个浓缩了Spring Cloud Microservices on Kubernetes最佳实践的mini微服务应用参考，用于最佳实践的分享，技术演示了：
 
-1. 一个可快速复制的采用``spring cloud``全家桶来开发微服务应用的框架；
-2. 一套可快速复制的将``spring cloud``微服务部署到``kubernetes``集群上的部署方案和YAML部署脚本（在实践项目应用中，这些YAML脚本应该需要部署到公司的CI & CD pipeline上以实现自动化的CI & CD）。
+1. 一个可快速复制的采用``Spring Cloud``全家桶来开发微服务应用的框架；
+2. 一套可快速复制的将``Spring Cloud``微服务部署到``Kubernetes``集群上的部署方案和YAML部署脚本（在实践项目应用中，这些YAML脚本应该需要部署到公司的CI & CD pipeline上以实现自动化的CI & CD）。
 
 
 ## 技术栈
@@ -26,7 +26,7 @@
 
 ## 在线演示
 
-为方便朋友们“无痛”体验``spring cloud``微服务和``kubernetes``集群部署，我在Azure云上购买了3台虚拟机，自己搭建了一套``kubernetes``集群，并将该mini微服务演示项目和底层依赖部署到这套集群上。目前正在优化部署中，过段时间将开放这套``kubernetes``集群权限和上面部署的``spring cloud``微服务demo供大家在线体验。在此之前大家可先研究下该项目的源代码。
+为方便朋友们“无痛”体验``Spring Cloud``微服务和``Kubernetes``集群部署，我在Azure云上购买了3台虚拟机，自己搭建了一套``Kubernetes``集群，并将该mini微服务演示项目和底层依赖部署到这套集群上。目前正在优化部署中，过段时间将开放这套``Kubernetes``集群权限和上面部署的``Spring Cloud``微服务demo供大家在线体验。在此之前大家可先研究下该项目的源代码。
 
 3台虚拟机的配置：
 1. Kubernetes Master node：1台，配置为标准 F2s_v2 (2 vcpu，4 GB 内存)；
