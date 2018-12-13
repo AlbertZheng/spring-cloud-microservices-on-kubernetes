@@ -21,7 +21,7 @@
 
 5. ``Flyway``：秉承``DevOps``的``一切均代码``思想，采用``Flyway``用于数据库升级的配置管理。
 
-6. ``Kubernetes``和``Rancher Server``：作为自动化部署、伸缩和编排微服务容器集群的IaaS平台。
+6. ``Kubernetes``和``Rancher Server``：作为自动化部署、伸缩和编排微服务容器集群的PaaS平台。
 
 
 ## 在线演示
@@ -55,4 +55,4 @@
 
 
 ## 结语
-感谢你的耐心阅读，如有对本项目中的Spring Cloud & Kubernetes的使用或者对本人的编码风格有更好的想法或者建议，欢迎通过邮件<lisong.zheng@gmail.com>或QQ<40000646@qq.com>与我取得联系，万分感谢。
+感谢你的耐心阅读，如有对本项目中的Spring Cloud & Kubernetes的使用或者对本人的编码风格有更好的想法或者建议，欢迎通过邮件 <lisong.zheng@gmail.com>或QQ <40000646@qq.com>与我取得联系，万分感谢。
