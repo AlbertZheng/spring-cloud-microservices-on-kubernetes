@@ -9,6 +9,11 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 
 
+/**
+ * Employee Microservice..
+ *
+ * @author 郑立松 - Albert Zheng <lisong.zheng@gmail.com>
+ */
 @SpringBootApplication(scanBasePackages = {"com.kyletiger.cloud"})
 // To scan my MyBatis mapper classes.
 @MapperScan("com.kyletiger.cloud.employee.mapper")

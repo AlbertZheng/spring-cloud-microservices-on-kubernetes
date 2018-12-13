@@ -6,7 +6,7 @@ zuul:
     # 启动饥饿加载
     eager-load:
       enabled: true
-  # 资源隔离策略采用thread pool，默认是semaphore
+  # 资源隔离策略配置为采用thread pool，默认是semaphore
   ribbon-isolation-strategy: thread
   thread-pool:
     # 为每个路由使用独立的thread pool

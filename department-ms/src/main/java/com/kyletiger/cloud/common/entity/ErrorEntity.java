@@ -4,6 +4,11 @@ import lombok.Data;
 import lombok.ToString;
 
 
+/**
+ * Error Entity.
+ *
+ * @author 郑立松 - Albert Zheng <lisong.zheng@gmail.com>
+ */
 @ToString(includeFieldNames = true)
 @Data
 public class ErrorEntity<T> {

@@ -8,6 +8,11 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 
+/**
+ * Zuul API Gateway.
+ *
+ * @author 郑立松 - Albert Zheng <lisong.zheng@gmail.com>
+ */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class, FlywayAutoConfiguration.class})
 // To use Zuul as API Gaeway for proxying requests to microservices.
 @EnableZuulProxy

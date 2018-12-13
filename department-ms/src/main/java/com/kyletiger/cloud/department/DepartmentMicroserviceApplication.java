@@ -8,6 +8,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
 
+/**
+ * Department Microservice.
+ *
+ * @author 郑立松 - Albert Zheng <lisong.zheng@gmail.com>
+ */
 @SpringBootApplication(scanBasePackages = {"com.kyletiger.cloud"})
 // To scan my MyBatis mapper classes.
 @MapperScan("com.kyletiger.cloud.department.mapper")

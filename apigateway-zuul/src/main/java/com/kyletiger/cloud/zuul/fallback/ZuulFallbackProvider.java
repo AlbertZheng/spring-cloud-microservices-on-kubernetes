@@ -14,11 +14,16 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 
 
+/**
+ * Zuul Fallback.
+ *
+ * @author 郑立松 - Albert Zheng <lisong.zheng@gmail.com>
+ */
 @Component
 public class ZuulFallbackProvider implements FallbackProvider {
     @Override
     public String getRoute() {
-        // 表明是为哪个微服务提供回退，*表示为所有微服务提供回退
+        // 为哪个微服务提供回退，*表示为所有微服务提供回退
         return "*";
     }
 
@@ -64,7 +69,7 @@ public class ZuulFallbackProvider implements FallbackProvider {
 
             @Override
             public HttpHeaders getHeaders() {
-                // headers设定
+                // Headers的设定
                 HttpHeaders headers = new HttpHeaders();
                 MediaType mt = new MediaType("application", "json", Charset.forName("UTF-8"));
                 headers.setContentType(mt);
