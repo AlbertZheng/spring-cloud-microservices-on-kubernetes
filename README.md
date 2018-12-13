@@ -8,13 +8,13 @@
 
 ## 技术栈
 
-1. ``spring cloud``全家桶：用于开发微服务应用。最佳搭配的全家桶组件有：
+1. ``Spring Cloud``全家桶：用于开发微服务应用。采用目前最稳定的``Edgware RELEASE``，最佳搭配的全家桶组件有：
 - 开发：``Zuul``作为API Gateway，``Eureka``作为服务注册治理中心，``Spring Cloud Config``作为配置中心，``Hystrix``作为熔断器、降级和限流，``Ribbon``作为负载均衡，``Feign``作为声明式的REST Client。
 - 运维监控：``Actuator``提供每个微服务的自省和监控能力，``Hystrix Dashboard``用于可视化监控Hystrix Metrics，``Turbine``用于聚合各个微服务的Hystrix Metrics，``Sleuth``和``Zipkin``用于分布式调用跟踪。
 
-2. ``Swagger``：用于REST API文档和兼作REST API调试。
+2. ``Swagger`` & ``Swagger UI``：用于REST API文档和兼作REST API调试。
 
-3. ``MyBatis``：用于数据库访问ORM。
+3. ``MyBatis``：用于``MySQL``数据库访问ORM。
 
 4. ``RabbitMQ``：用于可靠的消息服务中间件。
 
@@ -44,9 +44,13 @@
 ![](images/2018-12-13-03-07-37.png)
 
 
-## ToDo
+## 更新计划
 
 1. 采用``RabbitMQ``让各个微服务实例异步吐出Hystrix Metrics和``Turbine``进行异步采集聚合。
 2. 部署上``Zipkin``和``Elasticsearch``：估计虚拟机的配置需要升级才能跑得动:(。
-3. ``TCC``柔性事务处理的演示：需要再开发几个演示``TCC``的微服务。
-4. ``Spring Data JPA``进行ORM。
+3. ``TCC``柔性分布式事务处理的演示：需要再开发几个演示``TCC``的微服务。
+4. ``Spring Data JPA Repositories``+``Hibernate``：演示另一种数据库ORM方案。
+5. 文档：增加&完善文档。
+
+## 结语
+感谢你的耐心阅读，如有对本项目中的Spring Cloud & Kubernetes的使用或者对本人的编码风格有更好的想法或者建议，欢迎通过邮件<lisong.zheng@gmail.com>或QQ<40000646@qq.com>与我取得联系，万分感谢。
