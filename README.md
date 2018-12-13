@@ -4,13 +4,14 @@
 由于经常有互联网圈的朋友们来咨询关于用``spring cloud``全家桶开发微服务应用的问题、以及如何在``kubernetes``上编排部署``spring cloud``微服务的问题，因此萌发了将我以前在几个互联网项目中开发和k8s部署微服务实战中积累的最佳实践提炼出来分享的想法。本项目为一个浓缩了Spring Cloud Microservices on Kubernetes最佳实践的mini微服务应用参考，用于最佳实践的分享，技术演示了：
 
 1. 一个可快速复制的采用``spring cloud``全家桶来开发微服务应用的框架；
-2. 一套可快速复制的将``spring cloud``微服务部署到``kubernetes``集群上的部署方案和YAML部署脚本。
+2. 一套可快速复制的将``spring cloud``微服务部署到``kubernetes``集群上的部署方案和YAML部署脚本（在实践项目应用中，这些YAML脚本应该需要部署到公司的CI & CD pipeline上以实现自动化的CI & CD）。
+
 
 ## 技术栈
 
 1. ``Spring Cloud``全家桶：用于开发微服务应用。采用目前最稳定的``Edgware RELEASE``，最佳搭配的全家桶组件有：
-- 开发：``Zuul``作为API Gateway，``Eureka``作为服务注册治理中心，``Spring Cloud Config``作为配置中心，``Hystrix``作为熔断器、降级和限流，``Ribbon``作为负载均衡，``Feign``作为声明式的REST Client。
-- 运维监控：``Actuator``提供每个微服务的自省和监控能力，``Hystrix Dashboard``用于可视化监控Hystrix Metrics，``Turbine``用于聚合各个微服务的Hystrix Metrics，``Sleuth``和``Zipkin``用于分布式调用跟踪。
+    - 开发：``Zuul``作为API Gateway，``Eureka``作为服务注册治理中心，``Spring Cloud Config``作为配置中心，``Hystrix``作为熔断器、降级和限流，``Ribbon``作为负载均衡，``Feign``作为声明式的REST Client。
+    - 运维监控：``Actuator``提供每个微服务的自省和监控能力，``Hystrix Dashboard``用于可视化监控Hystrix Metrics，``Turbine``用于聚合各个微服务的Hystrix Metrics，``Sleuth``和``Zipkin``用于分布式调用跟踪。
 
 2. ``Swagger`` & ``Swagger UI``：用于REST API文档和兼作REST API调试。
 
