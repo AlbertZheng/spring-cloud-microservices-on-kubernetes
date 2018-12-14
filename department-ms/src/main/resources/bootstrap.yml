@@ -3,10 +3,6 @@ spring:
     name: department-ms
 
 eureka:
-  #client:
-    # 让Eureka Client将它宿主Service的Actuator的/health端点的健康状态传播到Eureka Server.
-    #healthcheck:
-    #  enabled: true
   instance:
     hostname: ${spring.application.name}
     # 将自己的IP地址注册到Eureka Server上，而不是采用**所在主机OS**的hostname进行注册.

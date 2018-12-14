@@ -1,7 +1,14 @@
 server:
   port: 8080
 
+eureka:
+  client:
+    # 让Eureka Client将它宿主Service的Actuator的/health端点的健康状态传播到Eureka Server.
+    healthcheck:
+      enabled: true
+
 zuul:
+  retryable: true
   ribbon:
     # 让Ribbon启动饥饿加载，加快第一次请求的速度
     eager-load:

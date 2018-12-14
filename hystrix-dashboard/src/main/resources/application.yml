@@ -1,6 +1,12 @@
 server:
   port: 9000
 
+eureka:
+  client:
+    # 让Eureka Client将它宿主Service的Actuator的/health端点的健康状态传播到Eureka Server.
+    healthcheck:
+      enabled: true
+
 logging:
   level:
     #org.springframework.cloud: DEBUG

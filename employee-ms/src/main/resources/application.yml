@@ -1,11 +1,32 @@
 server:
   port: 8000
 
+eureka:
+  client:
+    # 让Eureka Client将它宿主Service的Actuator的/health端点的健康状态传播到Eureka Server.
+    healthcheck:
+      enabled: true
+
+ribbon:
+  # Connect timeout used by HttpClient
+  ConnectTimeout: 1000   # 单位ms
+  # Read timeout used by HttpClient
+  ReadTimeout: 1000      # 单位ms
+  # Max number of retries on the same server (excluding the first try)
+  MaxAutoRetries: 1
+  # Max number of next servers to retry (excluding the first server)
+  MaxAutoRetriesNextServer: 1
+  # 【一般不需要配置】为ribbon配置饥饿加载，如果对于低配置的冷机器上跑的服务提供者，
+  #  我希望对方在第一次被调用时能在Hystrix的默认超时时间1s内响应的话。
+  eager-load:
+    enabled: true
+    clients: department-ms
+
 logging:
   level:
     #org.springframework.cloud: DEBUG
     #org.springframework.boot: DEBUG
-    # Feign只有当logging level是DEBUG时才会按如下配置的loggerLevel来输出它处理的请求的日志信息
+    # Feign只有当logging level是DEBUG时才会按如下配置的`loggerLevel`来输出它处理的请求的日志信息
     com.kyletiger.cloud.employee.feign.DepartmentFeignClient: DEBUG
 
 feign:
@@ -20,9 +41,27 @@ feign:
       min-request-size: 2048
   client:
     config:
-      employee-ms:
-        # Feign loggerLevel are: none, basic, headers, full
-        loggerLevel: full
+      default:  # 可采用'default'表示通用配置，通配到所有的feign clients
+        loggerLevel: full     # Feign loggerLevel are: none, basic, headers, full
+        connectTimeout: 1000   # 单位是ms
+        readTimeout: 1000      # 单位是ms
+      #department-ms:
+        #loggerLevel: full     # Feign loggerLevel are: none, basic, headers, full
+        #connectTimeout: 500   # 单位是ms
+        #readTimeout: 500      # 单位是ms
+
+hystrix:
+  command:
+    # 采用'default'针对所有Hystrix Command统一设置；也可采用<HystrixCommandKey>来针对某个command定制。
+    default:
+      #circuitBreaker:
+      #  enabled: true   # 熔断器默认已经是enabled，不建议disable它
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000   # 单位是ms，默认值是1s，不建议修改它
 
 management:
   #port: 8001

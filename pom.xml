@@ -144,6 +144,12 @@
       <artifactId>spring-cloud-starter-openfeign</artifactId>
     </dependency>
 
+    <!-- Spring Retry -->
+    <dependency>
+      <groupId>org.springframework.retry</groupId>
+      <artifactId>spring-retry</artifactId>
+    </dependency>
+    
     <!-- Spring Cloud Bus AMQP -->
     <!--
     <dependency>

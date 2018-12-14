@@ -29,6 +29,7 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
 // To enable Hystrix Circuit Breaker
 @EnableCircuitBreaker
+
 public class DepartmentMicroserviceApplication {
     public static void main(String[] args) {
         SpringApplication.run(DepartmentMicroserviceApplication.class, args);

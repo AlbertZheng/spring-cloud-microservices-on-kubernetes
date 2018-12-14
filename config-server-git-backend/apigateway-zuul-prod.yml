@@ -1,0 +1,55 @@
+# 后端各个微服务的timeout和并发参数可在配置中心里进行动态控制
+
+# Config for RibbonRoutingFilter
+## for Ribbon
+employee-ms:
+  ribbon:
+    ReadTimeout: 1000
+    ConnectTimeout: 1000
+    # Zuul隔离策略为THREAD时的并发参数
+    MaxTotalConnections: 0     # 默认值
+    MaxConnectionsPerHost: 0   # 默认值
+
+## for Ribbon
+department-ms:
+  ribbon:
+    ReadTimeout: 1000
+    ConnectTimeout: 1000
+    # Zuul隔离策略为THREAD时的并发参数
+    MaxTotalConnections: 0     # 默认值
+    MaxConnectionsPerHost: 0   # 默认值
+
+## for Hystrix
+hystrix:
+  command:
+    # 采用'default'针对所有Hystrix Command统一设置。
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000   # 单位是ms，默认值是1s，不建议修改它
+      # Hystrix熔断器设置
+      circuitBreaker:
+        # 当在配置时间窗口内达到此数量的失败后，进行熔断：默认20个
+        requestVolumeThreshold: 30
+        # 熔断多久以后开始尝试是否恢复：默认5秒
+        sleepWindowInMilliseconds: 5000
+        # 出错百分比阈值，当达到此阈值后，开始熔断：默认50%
+        errorThresholdPercentage: 50
+      # Hystrix Fallback设置
+      fallback:
+        isolation:
+          semaphore:
+            # 调用线程允许请求HystrixCommand.GetFallback()的最大数量：默认10，超出时将会有异常抛出
+            maxConcurrentRequests: 50
+
+# Config for SimpleHostRoutingFilter
+zuul:
+  host:
+    socket-timeout-millis: 1000
+    connect-timeout-millis: 1000
+    # Zuul隔离策略为THREAD时的并发参数
+    max-total-connections: 200      # 默认值
+    max-per-route-connections: 20   # 默认值
