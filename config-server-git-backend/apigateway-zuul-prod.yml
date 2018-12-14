@@ -7,8 +7,8 @@ employee-ms:
     ReadTimeout: 1000
     ConnectTimeout: 1000
     # Zuul隔离策略为THREAD时的并发参数
-    MaxTotalConnections: 0     # 默认值
-    MaxConnectionsPerHost: 0   # 默认值
+    MaxTotalConnections: 200
+    MaxConnectionsPerHost: 200
 
 ## for Ribbon
 department-ms:
@@ -16,8 +16,8 @@ department-ms:
     ReadTimeout: 1000
     ConnectTimeout: 1000
     # Zuul隔离策略为THREAD时的并发参数
-    MaxTotalConnections: 0     # 默认值
-    MaxConnectionsPerHost: 0   # 默认值
+    MaxTotalConnections: 200
+    MaxConnectionsPerHost: 200
 
 ## for Hystrix
 hystrix:
