@@ -1,7 +1,7 @@
 # 项目说明
 ## 简介
 
-由于经常有互联网圈的朋友们来咨询关于用``Spring Cloud``全家桶开发微服务应用的问题、以及如何在``Kubernetes``上编排部署``Spring Cloud``微服务的问题，因此萌发了将我以前在几个互联网项目中开发和k8s部署微服务实战中积累的最佳实践提炼出来分享的想法。本项目为一个浓缩了Spring Cloud Microservices on Kubernetes最佳实践的mini微服务应用参考，用于最佳实践的分享，技术演示了：
+经常有互联网圈的朋友们来咨询关于用``Spring Cloud``全家桶开发微服务应用的问题、以及如何在``Kubernetes``上编排部署``Spring Cloud``微服务、如何寻址的问题，因此萌发了将我以前在几个互联网项目中开发和k8s部署微服务实战中积累的最佳实践提炼出来分享的想法。本项目为一个浓缩了Spring Cloud Microservices on Kubernetes最佳实践的mini微服务应用参考，用于最佳实践的分享，技术演示了：
 
 1. 一个可快速复制的采用``Spring Cloud``全家桶来开发微服务应用的框架；
 2. 一套可快速复制的将``Spring Cloud``微服务部署到``Kubernetes``集群上的部署方案和YAML部署脚本（在实践项目应用中，这些YAML脚本应该需要部署到公司的CI & CD pipeline上以实现自动化的CI & CD）。
@@ -39,8 +39,6 @@
 ![](images/2018-12-13-02-50-08.png)
 
 ![](images/2018-12-13-03-06-27.png)
-
-![](images/2018-12-13-03-05-53.png)
 
 ![](images/2018-12-13-03-07-13.png)
 
