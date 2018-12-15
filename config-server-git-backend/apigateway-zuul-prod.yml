@@ -1,7 +1,6 @@
 # 后端各个微服务的timeout和并发参数可在配置中心里进行动态控制
 
-debug: true    # Enable debug logs.
-trace: false   # Enable trace logs.
+debug: true
 
 # Config for RibbonRoutingFilter
 ## for Ribbon
