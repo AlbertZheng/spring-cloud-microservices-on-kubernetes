@@ -10,7 +10,7 @@ employee-ms:
     ReadTimeout: 1000
     ConnectTimeout: 1000
     # Zuul隔离策略为THREAD时的并发参数
-    MaxTotalConnections: 200
+    MaxTotalConnections: 0 # 测试
     MaxConnectionsPerHost: 200
 
 ## for Ribbon
