@@ -1,7 +1,5 @@
 # 后端各个微服务的timeout和并发参数可在配置中心里进行动态控制
 
-debug: true
-
 # Config for RibbonRoutingFilter
 ## for Ribbon
 employee-ms:
@@ -9,7 +7,7 @@ employee-ms:
     ReadTimeout: 1000
     ConnectTimeout: 1000
     # Zuul隔离策略为THREAD时的并发参数
-    MaxTotalConnections: 0 # 测试
+    MaxTotalConnections: 200
     MaxConnectionsPerHost: 200
 
 ## for Ribbon
