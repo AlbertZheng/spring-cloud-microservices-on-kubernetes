@@ -40,6 +40,13 @@ management:
   security:
     # 允许Actuator的/health端点显示出详情
     enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
 
 info:
   app:

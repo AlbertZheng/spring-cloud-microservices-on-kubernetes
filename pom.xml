@@ -20,6 +20,7 @@
     <module>apigateway-zuul</module>
     <module>hystrix-dashboard</module>
     <module>hystrix-turbine</module>
+    <module>spring-boot-admin</module>
     <module>employee-ms</module>
     <module>department-ms</module>
   </modules>
@@ -29,8 +30,8 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <springcloud.version>Edgware.RELEASE</springcloud.version>
-    <springboot.version>1.5.9.RELEASE</springboot.version>
+    <spring-cloud.version>Edgware.RELEASE</spring-cloud.version>
+    <spring-boot.version>1.5.9.RELEASE</spring-boot.version>
     <guava.version>21.0</guava.version>
     <mysql-connector-java.version>5.1.40</mysql-connector-java.version>
     <springfox-swagger2.version>2.8.0</springfox-swagger2.version>
@@ -55,7 +56,7 @@
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
-        <version>${springcloud.version}</version>
+        <version>${spring-cloud.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -64,7 +65,7 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>${springboot.version}</version>
+        <version>${spring-boot.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -158,7 +159,7 @@
     </dependency>
     -->
 
-    <!-- Spring Boot Actuator: 监控当前应用的健康状况，提供很多监控端点。 -->
+    <!-- Spring Boot Actuator: 监控当前应用的健康状况，提供多种监控端点。 -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
@@ -276,7 +277,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${springboot.version}</version>
+        <version>${spring-boot.version}</version>
         <!-- If you are NOT using the parent POM of Spring Boot, you must additionally add an <executions> section to execute `repackage` goal for creating an executable 'fat' JAR or WAR. -->
         <executions>
           <execution>

@@ -1,0 +1,34 @@
+server:
+  port: 9090
+
+eureka:
+  client:
+    # 让Eureka Client将它宿主Service的Actuator的/health端点的健康状态传播到Eureka Server.
+    healthcheck:
+      enabled: true
+
+#logging:
+#  level:
+    #org.springframework.cloud: DEBUG
+    #org.springframework.boot: DEBUG
+
+management:
+  security:
+    # 允许Actuator的/health端点显示出详情
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+info:
+  app:
+    name: @project.artifactId@
+    encoding: @project.build.sourceEncoding@
+    java:
+      source: @java.version@
+      target: @java.version@
+
