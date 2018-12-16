@@ -9,7 +9,7 @@ eureka:
     prefer-ip-address: true
     leaseRenewalIntervalInSeconds: 10
     # Let Admin server to check this URL rather than '/actuator/health'
-    health-check-url-path: /actuator/health
+    health-check-url-path: /health
 
 ---
 spring:

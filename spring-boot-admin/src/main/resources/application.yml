@@ -18,12 +18,13 @@ management:
     enabled: false
   endpoints:
     web:
+      base-path: /
       exposure:
         include: "*"
   endpoint:
     health:
       show-details: ALWAYS
-
+  
 info:
   app:
     name: @project.artifactId@
