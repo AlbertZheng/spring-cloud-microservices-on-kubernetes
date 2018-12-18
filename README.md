@@ -28,13 +28,19 @@
 
 ## 在线演示
 
-为方便朋友们“无痛”体验``Spring Cloud``微服务和``Kubernetes``集群部署，我在Azure云上购买了3台虚拟机，自己搭建了一套``Kubernetes``集群，并将该mini微服务演示项目和底层依赖部署到这套集群上。目前正在优化部署中，过段时间将开放这套``Kubernetes``集群权限供大家在线体验。在此之前大家可先研究下该项目的源代码。
+为方便朋友们“无痛”体验``Spring Cloud``微服务和``Kubernetes``集群部署，我在Azure云上购买了3台虚拟机，自己搭建了一套``Kubernetes``集群，并将该mini微服务演示项目和底层依赖部署到这套集群上。开放出一个read only的Kubernetes集群体验账号供大家体验。
 
-3台虚拟机的配置：
+Kubernetes集群体验账号：
+- Web Console URL: master1.k8s.kyletiger.com
+- Login Name: spring
+- Password: spring123456
+
+3台虚拟机的配置如下：
 1. Kubernetes Master node：1台，配置为标准 F2s_v2 (2 vcpu，4 GB 内存)；
 2. Kubernetes Worker node：2台，配置为标准 F1s (1 vcpu，2 GB 内存)。
 
 请：不要流量攻击这套集群或漏洞扫描！这套系统只是纯粹用于交流和方便网友，小成本的部署环境而已，没有$去购买高性能虚拟机和WAF网关、抗DDoS等安全防护服务。
+
 
 ### 服务字典
 
