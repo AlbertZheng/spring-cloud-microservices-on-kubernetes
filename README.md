@@ -36,6 +36,33 @@
 
 请：不要流量攻击这套集群或漏洞扫描！这套系统只是纯粹用于交流和方便网友，小成本的部署环境而已，没有$去购买高性能虚拟机和WAF网关、抗DDoS等安全防护服务。
 
+### 服务字典
+
+注意：
+1. 所有暴露出来可供外网访问的服务，纯粹只是为了方便网友在学习spring cloud时远程使用现成的基础服务（例如，Eureka服务注册中心），才特地采用``type: NodePort``部署方式额外再将该服务expose在外网IP上；
+2. 对于实际项目，需采用``type: LoadBalancer``部署方案来expose服务，只对内网访问开放！
+
+服务 | 内网寻址 | 内网服务端口 | 外网DNS寻址 | 外网服务端口
+---|---|---|---|---
+服务注册中心-0 | eureka-0.discovery.svc.cluster.local | 8761 | master1.k8s.kyletiger.com | 38761
+---|---|---|---|---
+服务注册中心-1 | eureka-1.discovery.svc.cluster.local | 8761 | node1.k8s.kyletiger.com | 38762
+---|---|---|---|---
+配置中心 | 由各服务消费者到Eureka Server上查询寻址方式 | 8888 | node1.k8s.kyletiger.com | 38888
+---|---|---|---|---
+API Gateway Zuul | 由各服务消费者到Eureka Server上查询寻址方式 | 8080 | master1.k8s.kyletiger.com | 38080
+---|---|---|---|---
+Hystrix Dashboard | 由各服务消费者到Eureka Server上查询寻址方式 | 9000 | node2.k8s.kyletiger.com | 39000
+---|---|---|---|---
+Hystrix Turbine | 由各服务消费者到Eureka Server上查询寻址方式 | 9010 | master1.k8s.kyletiger.com | 39010
+---|---|---|---|---
+Spring Boot Admin | 由各服务消费者到Eureka Server上查询寻址方式 | 9090 | node2.k8s.kyletiger.com | 39090
+---|---|---|---|---
+Employee微服务 | 由各服务消费者到Eureka Server上查询寻址方式 | 8000 | node2.k8s.kyletiger.com | 38000
+---|---|---|---|---
+Department微服务 | 由各服务消费者到Eureka Server上查询寻址方式 | 8100 | node2.k8s.kyletiger.com | 38100
+
+
 Kubernetes集群管理:
 ![](images/2018-12-13-02-50-08.png)
 

@@ -9,7 +9,7 @@ spec:
   selector:
     app: mysql
   # Production environment: Use below.
-  # Lets the Service DNS name resolve directly to the Pod’s IP address
+  # Let the Service DNS name resolve directly to the Pod’s IP address
   #clusterIP: None
   #
   # Non-production environment: Use below for exposing on external public IP.
