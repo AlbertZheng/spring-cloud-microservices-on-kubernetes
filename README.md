@@ -28,7 +28,7 @@
 
 ## 在线演示
 
-为方便朋友们“无痛”体验``Spring Cloud``微服务和``Kubernetes``集群部署，我在Azure云上购买了3台虚拟机，自己搭建了一套``Kubernetes``集群，并将该mini微服务演示项目和底层依赖部署到这套集群上。目前正在优化部署中，过段时间将开放这套``Kubernetes``集群权限和上面部署的``Spring Cloud``微服务demo供大家在线体验。在此之前大家可先研究下该项目的源代码。
+为方便朋友们“无痛”体验``Spring Cloud``微服务和``Kubernetes``集群部署，我在Azure云上购买了3台虚拟机，自己搭建了一套``Kubernetes``集群，并将该mini微服务演示项目和底层依赖部署到这套集群上。目前正在优化部署中，过段时间将开放这套``Kubernetes``集群权限供大家在线体验。在此之前大家可先研究下该项目的源代码。
 
 3台虚拟机的配置：
 1. Kubernetes Master node：1台，配置为标准 F2s_v2 (2 vcpu，4 GB 内存)；
@@ -39,31 +39,24 @@
 ### 服务字典
 
 注意：
-1. 所有暴露出来可供外网访问的服务，纯粹只是为了方便网友在学习spring cloud时远程使用现成的基础服务（例如，Eureka服务注册中心），才特地采用``type: NodePort``部署方式额外再将该服务expose在外网IP上；
+1. Kubernetes集群里所有暴露出来可供外网访问的服务，纯粹只是为了方便网友在学习spring cloud时远程使用现成的基础服务（例如，Eureka服务注册中心），才特地采用``type: NodePort``部署方式额外再将该服务expose在外网IP上；
 2. 对于实际项目，需采用``type: LoadBalancer``部署方案来expose服务，只对内网访问开放！
 
 服务 | 内网寻址 | 内网服务端口 | 外网DNS寻址 | 外网服务端口
 ---|---|---|---|---
 服务注册中心-0 | eureka-0.discovery.svc.cluster.local | 8761 | master1.k8s.kyletiger.com | 38761
----|---|---|---|---
 服务注册中心-1 | eureka-1.discovery.svc.cluster.local | 8761 | node1.k8s.kyletiger.com | 38762
----|---|---|---|---
 配置中心 | 由各服务消费者到Eureka Server上查询寻址方式 | 8888 | node1.k8s.kyletiger.com | 38888
----|---|---|---|---
-API Gateway Zuul | 由各服务消费者到Eureka Server上查询寻址方式 | 8080 | master1.k8s.kyletiger.com | 38080
----|---|---|---|---
-Hystrix Dashboard | 由各服务消费者到Eureka Server上查询寻址方式 | 9000 | node2.k8s.kyletiger.com | 39000
----|---|---|---|---
-Hystrix Turbine | 由各服务消费者到Eureka Server上查询寻址方式 | 9010 | master1.k8s.kyletiger.com | 39010
----|---|---|---|---
-Spring Boot Admin | 由各服务消费者到Eureka Server上查询寻址方式 | 9090 | node2.k8s.kyletiger.com | 39090
----|---|---|---|---
-Employee微服务 | 由各服务消费者到Eureka Server上查询寻址方式 | 8000 | node2.k8s.kyletiger.com | 38000
----|---|---|---|---
-Department微服务 | 由各服务消费者到Eureka Server上查询寻址方式 | 8100 | node2.k8s.kyletiger.com | 38100
+API Gateway Zuul | 由服务消费者到服务注册中心上查询寻址方式 | 8080 | master1.k8s.kyletiger.com | 38080
+Hystrix Dashboard | 由服务消费者到服务注册中心上查询寻址方式 | 9000 | node2.k8s.kyletiger.com | 39000
+Hystrix Turbine | 由服务消费者到服务注册中心上查询寻址方式 | 9100 | master1.k8s.kyletiger.com | 39100
+Spring Boot Admin | 由服务消费者到服务注册中心上查询寻址方式 | 9090 | node2.k8s.kyletiger.com | 39090
+Employee微服务 | 由服务消费者到服务注册中心上查询寻址方式 | 8000 | node2.k8s.kyletiger.com | 38000
+Department微服务 | 由服务消费者到服务注册中心上查询寻址方式 | 8100 | node2.k8s.kyletiger.com | 38100
 
 
-Kubernetes集群管理:
+- Kubernetes集群管理:
+
 ![](images/2018-12-13-02-50-08.png)
 
 ![](images/2018-12-16-21-28-39.png)
@@ -72,17 +65,21 @@ Kubernetes集群管理:
 
 ![](images/2018-12-13-03-07-37.png)
 
-微服务注册中心：
+- 微服务注册中心：
+
 ![](images/2018-12-14-01-45-04.png)
 
-Spring Boot Admin:
+- Spring Boot Admin:
+
 ![](images/2018-12-16-21-38-21.png)
 ![](images/2018-12-16-21-37-52.png)
 
-Hystrix Dashboard:
+- Hystrix Dashboard:
+
 ![](images/2018-12-14-01-49-17.png)
 
-Swagger:
+- Swagger:
+
 ![](images/2018-12-14-01-50-37.png)
 
 
