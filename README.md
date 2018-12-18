@@ -44,8 +44,8 @@
 
 服务 | 内网服务寻址 | 内网服务端口 | 外网DNS寻址 | 外网服务端口
 ---|---|---|---|---
-服务注册中心-0 | eureka-0.discovery.svc.cluster.local | 8761 | master1.k8s.kyletiger.com | 38761
-服务注册中心-1 | eureka-1.discovery.svc.cluster.local | 8761 | node1.k8s.kyletiger.com | 38762
+服务注册中心-0 | eureka-0.discovery.default.svc.cluster.local | 8761 | master1.k8s.kyletiger.com | 38761
+服务注册中心-1 | eureka-1.discovery.default.svc.cluster.local | 8761 | node1.k8s.kyletiger.com | 38762
 配置中心 | 由服务消费者到Eureka Server上查询寻址方式 | 8888 | node1.k8s.kyletiger.com | 38888
 API Gateway Zuul | 由服务消费者到服务注册中心上查询寻址方式 | 8080 | master1.k8s.kyletiger.com | 38080
 Hystrix Dashboard | 由服务消费者到服务注册中心上查询寻址方式 | 9000 | node2.k8s.kyletiger.com | 39000
