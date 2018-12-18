@@ -42,11 +42,11 @@
 1. Kubernetes集群里所有暴露出来可供外网访问的服务，纯粹只是为了方便网友在学习spring cloud时远程使用现成的基础服务（例如，Eureka服务注册中心），才特地采用``type: NodePort``部署方式额外再将该服务expose在外网IP上；
 2. 对于实际项目，需采用``type: LoadBalancer``部署方案来expose服务，只对内网访问开放！
 
-服务 | 内网寻址 | 内网服务端口 | 外网DNS寻址 | 外网服务端口
+服务 | 内网服务寻址 | 内网服务端口 | 外网DNS寻址 | 外网服务端口
 ---|---|---|---|---
 服务注册中心-0 | eureka-0.discovery.svc.cluster.local | 8761 | master1.k8s.kyletiger.com | 38761
 服务注册中心-1 | eureka-1.discovery.svc.cluster.local | 8761 | node1.k8s.kyletiger.com | 38762
-配置中心 | 由各服务消费者到Eureka Server上查询寻址方式 | 8888 | node1.k8s.kyletiger.com | 38888
+配置中心 | 由服务消费者到Eureka Server上查询寻址方式 | 8888 | node1.k8s.kyletiger.com | 38888
 API Gateway Zuul | 由服务消费者到服务注册中心上查询寻址方式 | 8080 | master1.k8s.kyletiger.com | 38080
 Hystrix Dashboard | 由服务消费者到服务注册中心上查询寻址方式 | 9000 | node2.k8s.kyletiger.com | 39000
 Hystrix Turbine | 由服务消费者到服务注册中心上查询寻址方式 | 9100 | master1.k8s.kyletiger.com | 39100
