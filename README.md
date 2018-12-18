@@ -9,28 +9,28 @@
 
 ## 技术栈
 
-1. ``Spring Cloud``全家桶：用于开发微服务应用。采用目前最稳定的``Edgware RELEASE``，最佳搭配的全家桶组件有：
+1. ``Kubernetes``和``Rancher Server``：作为自动化部署、伸缩和编排微服务容器集群的PaaS平台。
+
+2. ``Spring Cloud``全家桶：用于开发微服务应用。采用目前最稳定的``Edgware RELEASE``，最佳搭配的全家桶组件有：
     - 开发：``Zuul``作为API Gateway，``Eureka``作为服务注册治理中心，``Spring Cloud Config``作为配置中心，``Hystrix``作为熔断器、降级和限流，``Ribbon``作为负载均衡，``Feign``作为声明式的REST Client。
     - 监控：``Spring Boot Actuator``+``Spring Boor Admin``提供每个微服务的自省和监控能力、以及可视化监控UI，``Hystrix Dashboard``用于可视化监控Hystrix Metrics，``Turbine``用于聚合各个微服务的Hystrix Metrics，``Sleuth``和``Zipkin``用于分布式调用跟踪。
 
-2. ``Swagger`` & ``Swagger UI``：用于REST API文档和兼作REST API调试。
+3. ``Swagger`` & ``Swagger UI``：用于REST API文档和兼作REST API调试。
 
-3. ``MyBatis``：用于``MySQL``数据库访问ORM。
+4. ``MyBatis``：用于``MySQL``数据库访问ORM。
 
-4. ``RabbitMQ``：用于可靠的消息服务中间件。
+5. ``RabbitMQ``：用于可靠的消息服务中间件。
 
-5. ``Flyway``：秉承``DevOps``的``一切均代码``思想，采用``Flyway``用于数据库升级的配置管理。
-
-6. ``Kubernetes``和``Rancher Server``：作为自动化部署、伸缩和编排微服务容器集群的PaaS平台。
+6. ``Flyway``：秉承``DevOps``的``一切均代码``思想，采用``Flyway``用于数据库升级的配置管理。
 
 7. 第三库：``lombok``，``guava``
 
 
 ## 在线演示
 
-为方便朋友们“无痛”体验``Spring Cloud``微服务和``Kubernetes``集群部署，我在Azure云上购买了3台虚拟机，自己搭建了一套``Kubernetes``集群，并将该mini微服务演示项目和底层依赖部署到这套集群上。开放出一个read only的Kubernetes集群体验账号供大家体验。
+为方便朋友们“无痛”体验``Spring Cloud``微服务和``Kubernetes``集群部署，我在Azure云上购买了3台虚拟机，自己搭建了一套``Kubernetes``集群，并将该mini微服务演示项目和底层依赖部署到这套集群上。开放出一个read only的``Kubernetes``集群体验账号供大家体验。
 
-Kubernetes集群体验账号：
+``Kubernetes``集群体验账号：
 - Web Console URL: master1.k8s.kyletiger.com
 - Login Name: spring
 - Password: spring123456
