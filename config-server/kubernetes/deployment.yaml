@@ -43,3 +43,4 @@ spec:
             value: '--spring.profiles.active=prod'
         ports:
         - containerPort: 8888
+        imagePullPolicy: Always

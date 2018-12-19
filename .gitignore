@@ -32,3 +32,4 @@ hs_err_pid*
 target/
 account-ms
 log.txt
+sonarqube-compose.yaml

@@ -8,3 +8,4 @@ cd hystrix-turbine; mvn dockerfile:push; cd ..
 cd apigateway-zuul; mvn dockerfile:push; cd ..
 cd employee-ms; mvn dockerfile:push; cd ..
 cd department-ms; mvn dockerfile:push; cd ..
+cd spring-boot-admin; mvn dockerfile:push; cd ..

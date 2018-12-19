@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: discovery-eureka
+  cloud:
+    config:
+      enabled: false
 
 eureka:
   client:
@@ -17,6 +20,7 @@ eureka:
     enable-self-preservation: true
   instance:
     hostname: ${spring.application.name}
+    #instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
     # 将自己的IP地址注册到Eureka Server上，而不是采用**所在主机OS**的hostname进行注册.
     prefer-ip-address: true
 
@@ -27,3 +31,10 @@ info:
     java:
       source: @java.version@
       target: @java.version@
+
+logging:
+  level:
+    #org.springframework.cloud: DEBUG
+    #org.springframework.boot: DEBUG
+    com.netflix.eureka: DEBUG
+    com.netflix.discovery: DEBUG

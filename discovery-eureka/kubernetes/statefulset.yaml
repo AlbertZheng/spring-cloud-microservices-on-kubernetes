@@ -20,12 +20,12 @@ metadata:
   ## Each Pod's FQDN will be $(statefulSet name)-$(ordinal).$(serviceName).$(namespace).svc.cluster.local
   name: eureka                      # the name of this StatefulSet
 spec:
-  serviceName: "discovery"          # has to match metadata.name of the above section "Service"
+  serviceName: "discovery"          # has to match .metadata.name of the above section "Service"
   replicas: 2
   podManagementPolicy: Parallel
   selector:
     matchLabels:
-      app: eureka-app               #  has to match .spec.template.metadata.labels
+      app: eureka-app               # has to match .spec.template.metadata.labels
   template:
     metadata:
       labels:
@@ -39,3 +39,4 @@ spec:
             value: '--spring.profiles.active=prod'
         ports:
         - containerPort: 8761
+        imagePullPolicy: Always

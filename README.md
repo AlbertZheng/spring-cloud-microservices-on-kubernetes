@@ -1,7 +1,7 @@
 # 项目说明
 ## 简介
 
-经常有互联网圈的朋友们来咨询关于用``Spring Cloud``全家桶开发微服务应用的问题、以及如何在``Kubernetes``上编排部署``Spring Cloud``微服务、如何寻址的问题，因此萌发了将我以前在几个互联网项目中开发和k8s部署微服务实战中积累的最佳实践提炼出来分享的想法。本项目为一个浓缩了Spring Cloud Microservices on Kubernetes最佳实践的mini微服务应用参考，用于最佳实践的分享，技术演示了：
+有朋友们来咨询关于用``Spring Cloud``全家桶开发微服务应用的问题、以及在``Kubernetes``上编排部署``Spring Cloud``微服务、如何寻址的问题，因此萌发了将我以前在几个互联网项目中开发和k8s部署微服务实战中积累的最佳实践提炼出来分享的想法。本项目为一个浓缩了Spring Cloud Microservices on Kubernetes最佳实践的mini微服务应用参考，用于最佳实践的分享，技术演示了：
 
 1. 一个可快速复制的采用``Spring Cloud``全家桶来开发微服务应用的框架；
 2. 一套可快速复制的将``Spring Cloud``微服务部署到``Kubernetes``集群上的部署方案和YAML部署脚本（在生产项目应用中，这些YAML脚本应该需要部署到公司的CI & CD pipeline上以实现自动化的CI & CD）。
@@ -45,7 +45,7 @@
 ### 服务字典
 
 注意：
-1. Kubernetes集群里所有暴露出来可供外网访问的服务，纯粹只是为了方便网友在学习spring cloud时远程使用现成的基础服务（例如，Eureka服务注册中心），才特地采用``type: NodePort``部署方式额外再将该服务expose在外网IP上；
+1. Kubernetes集群里所有暴露出来可供外网访问的服务，旨在为了方便``Spring Cloud``爱好者在学习和调试时可远程使用现成的基础服务（例如，Eureka服务注册中心、配置中心），才特地采用``type: NodePort``部署方式额外再将该服务expose在外网IP上；
 2. 对于实际项目，需采用``type: LoadBalancer``部署方案来expose服务，只对内网访问开放！
 
 服务 | 内网服务寻址 | 内网服务端口 | 外网DNS寻址 | 外网服务端口
