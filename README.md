@@ -28,7 +28,7 @@
 
 ## 在线演示
 
-为方便朋友们“无痛”体验``Spring Cloud``微服务和``Kubernetes``集群部署，我在Azure云上购买了3台虚拟机，自己搭建了一套``Kubernetes``集群，并将该mini微服务演示项目和底层依赖部署到这套集群上。开放出一个read only的``Kubernetes``集群体验账号供大家体验。
+为方便朋友们“无痛”体验``Spring Cloud``微服务和``Kubernetes``集群部署，我在Azure云上购买了3台虚拟机，自己搭建了一套``Kubernetes``集群，并将该mini微服务演示项目和底层依赖部署到这套集群上。开放出一个read only的``Kubernetes``集群体验账号供大家体验。【注：因海外服务器网络访问延迟因素，已暂停Azure上的系统，正在将演示系统迁移到国内云服务器上，目前正在进行ICP备案号申请，备案成功后将继续开通该演示系统的域名访问】
 
 ``Kubernetes``集群体验账号：
 - Web Console URL: master1.k8s.kyletiger.com
