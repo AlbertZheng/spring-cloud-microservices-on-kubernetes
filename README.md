@@ -26,69 +26,6 @@
 7. 第三库：``lombok``，``guava``
 
 
-## 在线演示
-
-为方便朋友们“无痛”体验``Spring Cloud``微服务和``Kubernetes``集群部署，我在Azure云上购买了3台虚拟机，自己搭建了一套``Kubernetes``集群，并将该mini微服务演示项目和底层依赖部署到这套集群上。开放出一个read only的``Kubernetes``集群体验账号供大家体验。【注：因海外服务器网络访问延迟因素，已暂停Azure上的系统，正在将演示系统迁移到国内云服务器上，目前正在进行ICP备案号申请，备案成功后将继续开通该演示系统的域名访问】
-
-``Kubernetes``集群体验账号：
-- Web Console URL: master1.k8s.kyletiger.com
-- Login Name: spring
-- Password: spring123456
-
-3台虚拟机的配置如下：
-1. Kubernetes Master node：1台，配置为标准 F2s_v2 (2 vcpu，4 GB 内存)；
-2. Kubernetes Worker node：2台，配置为标准 F1s (1 vcpu，2 GB 内存)。
-
-请：不要流量攻击这套集群或漏洞扫描！这套系统只是纯粹用于交流和方便网友，小成本的部署环境而已，没有$去购买高性能虚拟机和WAF网关、抗DDoS等安全防护服务。
-
-
-### 服务字典
-
-注意：
-1. Kubernetes集群里所有暴露出来可供外网访问的服务，旨在为了方便``Spring Cloud``爱好者在学习和调试时可远程使用现成的基础服务（例如，Eureka服务注册中心、配置中心），才特地采用``type: NodePort``部署方式额外再将该服务expose在外网IP上；
-2. 对于实际项目，需采用``type: LoadBalancer``部署方案来expose服务，只对内网访问开放！
-
-服务 | 内网服务寻址 | 内网服务端口 | 外网DNS寻址 | 外网服务端口
----|---|---|---|---
-服务注册中心HA-0 | eureka-0.discovery.default.svc.cluster.local | 8761 | master1.k8s.kyletiger.com | 38761
-服务注册中心HA-1 | eureka-1.discovery.default.svc.cluster.local | 8761 | node1.k8s.kyletiger.com | 38762
-配置中心HA | 由服务消费者到Eureka Server上查询寻址方式 | 8888 | node1.k8s.kyletiger.com | 38888
-API Gateway Zuul HA | 由服务消费者到服务注册中心上查询寻址方式 | 8080 | master1.k8s.kyletiger.com | 38080
-Hystrix Dashboard | 由服务消费者到服务注册中心上查询寻址方式 | 9000 | node2.k8s.kyletiger.com | 39000
-Hystrix Turbine | 由服务消费者到服务注册中心上查询寻址方式 | 9100 | master1.k8s.kyletiger.com | 39100
-Spring Boot Admin | 由服务消费者到服务注册中心上查询寻址方式 | 9090 | node2.k8s.kyletiger.com | 39090
-Employee微服务 | 由服务消费者到服务注册中心上查询寻址方式 | 8000 | node2.k8s.kyletiger.com | 38000
-Department微服务 | 由服务消费者到服务注册中心上查询寻址方式 | 8100 | node2.k8s.kyletiger.com | 38100
-
-
-- Kubernetes集群管理:
-
-![](images/2018-12-13-02-50-08.png)
-
-![](images/2018-12-16-21-28-39.png)
-
-![](images/2018-12-16-21-29-59.png)
-
-![](images/2018-12-13-03-07-37.png)
-
-- 微服务注册中心：
-
-![](images/2018-12-14-01-45-04.png)
-
-- Spring Boot Admin:
-
-![](images/2018-12-16-21-38-21.png)
-![](images/2018-12-16-21-37-52.png)
-
-- Hystrix Dashboard:
-
-![](images/2018-12-14-01-49-17.png)
-
-- Swagger:
-
-![](images/2018-12-14-01-50-37.png)
-
-
 ## 更新计划
 
 1. 采用``RabbitMQ``让各个微服务实例异步吐出Hystrix Metrics和``Turbine``进行异步采集聚合。
